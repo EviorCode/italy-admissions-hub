@@ -29,36 +29,48 @@ const resources = [
 
 export function Resources() {
   return (
-    <section id="resources" className="section-padding bg-card">
+    <section id="resources" className="py-20 md:py-24 bg-gray-50">
       <div className="section-container">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-3">
             Study in Italy Resources
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Everything you need to plan your education journey in Italy.
+          <p className="text-base text-muted-foreground max-w-2xl">
+            Everything you need to plan your education journey in Italy
           </p>
         </div>
 
         {/* Resources Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {resources.map((resource) => (
+          {resources.map((resource, index) => (
             <a
               key={resource.title}
               href={resource.href}
-              className="group bg-secondary/30 rounded-xl p-6 border border-border card-hover"
+              className="group animate-fade-in"
+              style={{ animationDelay: `${index * 80}ms` }}
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 mb-4 group-hover:bg-primary/20 transition-colors">
-                <resource.icon className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                {resource.title}
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">{resource.description}</p>
-              <div className="flex items-center text-sm text-primary font-medium">
-                Read more
-                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+              <div className="bg-white rounded-xl border border-gray-300 p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300 h-full flex flex-col">
+                {/* Icon */}
+                <div className="mb-5">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-primary/10 group-hover:scale-110 transition-transform duration-300">
+                    <resource.icon className="w-7 h-7 text-primary" strokeWidth={2} />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <h3 className="text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                  {resource.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
+                  {resource.description}
+                </p>
+
+                {/* Read More Link */}
+                <div className="flex items-center text-sm text-primary font-medium pt-3 border-t border-gray-200">
+                  Read more
+                  <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
+                </div>
               </div>
             </a>
           ))}

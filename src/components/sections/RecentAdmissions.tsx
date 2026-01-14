@@ -1,4 +1,4 @@
-import { ArrowRight, Globe, Calendar } from "lucide-react";
+import { ArrowRight, Globe, Calendar, MapPin, Clock, Euro } from "lucide-react";
 
 interface Admission {
   id: number;
@@ -10,6 +10,10 @@ interface Admission {
   deadline: string;
   isNew: boolean;
   deadlineSoon: boolean;
+  city: string;
+  duration: string;
+  tuitionFee: string;
+  intake: string;
 }
 
 const admissions: Admission[] = [
@@ -23,6 +27,10 @@ const admissions: Admission[] = [
     deadline: "Mar 15, 2026",
     isNew: true,
     deadlineSoon: false,
+    city: "Milan",
+    duration: "2 Years",
+    tuitionFee: "€3,900/year",
+    intake: "Fall 2026",
   },
   {
     id: 2,
@@ -34,6 +42,10 @@ const admissions: Admission[] = [
     deadline: "Feb 28, 2026",
     isNew: true,
     deadlineSoon: true,
+    city: "Bologna",
+    duration: "3 Years",
+    tuitionFee: "€2,800/year",
+    intake: "Fall 2026",
   },
   {
     id: 3,
@@ -45,6 +57,10 @@ const admissions: Admission[] = [
     deadline: "Apr 10, 2026",
     isNew: false,
     deadlineSoon: false,
+    city: "Rome",
+    duration: "3-4 Years",
+    tuitionFee: "Free + Scholarship",
+    intake: "Fall 2026",
   },
   {
     id: 4,
@@ -56,6 +72,10 @@ const admissions: Admission[] = [
     deadline: "Mar 1, 2026",
     isNew: true,
     deadlineSoon: true,
+    city: "Milan",
+    duration: "2 Years",
+    tuitionFee: "€14,000/year",
+    intake: "Fall 2026",
   },
   {
     id: 5,
@@ -67,6 +87,10 @@ const admissions: Admission[] = [
     deadline: "Mar 20, 2026",
     isNew: true,
     deadlineSoon: false,
+    city: "Padua",
+    duration: "3 Years",
+    tuitionFee: "€2,500/year",
+    intake: "Fall 2026",
   },
   {
     id: 6,
@@ -78,6 +102,10 @@ const admissions: Admission[] = [
     deadline: "Mar 30, 2026",
     isNew: false,
     deadlineSoon: false,
+    city: "Milan",
+    duration: "2 Years",
+    tuitionFee: "€3,200/year",
+    intake: "Fall 2026",
   },
 ];
 
@@ -128,12 +156,12 @@ function AdmissionCard({ admission, index }: { admission: Admission; index: numb
       {/* Card Content */}
       <div className="p-5">
         {/* Program Title */}
-        <h3 className="text-lg font-semibold text-foreground mb-4 leading-tight group-hover:text-primary transition-colors line-clamp-2">
+        <h3 className="text-lg font-semibold text-foreground mb-3 leading-tight group-hover:text-primary transition-colors line-clamp-2">
           {admission.program}
         </h3>
 
-        {/* Meta Information */}
-        <div className="flex items-center gap-4 mb-4 pb-4 border-b border-gray-100">
+        {/* Primary Meta Information */}
+        <div className="flex items-center gap-4 mb-4 pb-4 border-b border-gray-200">
           <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <div className="w-1.5 h-1.5 rounded-full bg-primary" />
             <span className="font-medium">{admission.degreeLevel}</span>
@@ -144,8 +172,29 @@ function AdmissionCard({ admission, index }: { admission: Admission; index: numb
           </div>
         </div>
 
-        {/* Deadline */}
-        <div className="flex items-center justify-between">
+        {/* Detailed Information Grid */}
+        <div className="space-y-3 mb-4">
+          {/* City & Duration */}
+          <div className="flex items-center justify-between text-sm">
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <MapPin className="w-3.5 h-3.5" strokeWidth={2} />
+              <span>{admission.city}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <Clock className="w-3.5 h-3.5" strokeWidth={2} />
+              <span>{admission.duration}</span>
+            </div>
+          </div>
+
+          {/* Tuition Fee */}
+          <div className="flex items-center gap-2 text-sm">
+            <Euro className="w-3.5 h-3.5 text-primary" strokeWidth={2} />
+            <span className="font-semibold text-foreground">{admission.tuitionFee}</span>
+          </div>
+        </div>
+
+        {/* Deadline & CTA */}
+        <div className="flex items-center justify-between pt-4 border-t border-gray-200">
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-primary" />
             <div>

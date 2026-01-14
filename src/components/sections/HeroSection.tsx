@@ -1,98 +1,187 @@
-import { ArrowRight, Building2, Globe, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroStudents from "@/assets/hero-students.jpg";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { useRef } from "react";
+import { Mic, Monitor, Laptop, Headphones } from "lucide-react";
 
-const trustIndicators = [
-  { icon: Building2, value: "80+", label: "Italian Universities" },
-  { icon: Globe, value: "EN & IT", label: "Taught Programs" },
-  { icon: CalendarCheck, value: "Daily", label: "Admissions Updated" },
+const carouselSlides = [
+  {
+    id: 1,
+    title: "Recently Open Admissions",
+    subtitle: "Your Gateway to Italian Higher Education",
+    description: "in Italian Universities - Updated Daily",
+    cta: "View Admissions",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&h=600&fit=crop",
+    icons: [
+      { Icon: Mic, color: "bg-pink-100 text-pink-500" },
+      { Icon: Headphones, color: "bg-purple-100 text-purple-500" },
+      { Icon: Monitor, color: "bg-green-100 text-green-500" },
+      { Icon: Laptop, color: "bg-cyan-100 text-cyan-500" },
+    ],
+  },
+  {
+    id: 2,
+    title: "Study in Italy",
+    subtitle: "Discover World-Class Education",
+    description: "Explore 80+ prestigious Italian universities and academies",
+    cta: "Browse Universities",
+    image: "https://images.unsplash.com/photo-1561525985-654e6a2fa04a?w=1200&h=600&fit=crop",
+    icons: [],
+  },
+  {
+    id: 3,
+    title: "Never Miss a Deadline",
+    subtitle: "Stay Updated with Real-Time Alerts",
+    description: "Get notified when new admissions open at your dream universities",
+    cta: "Get Alerts",
+    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&h=600&fit=crop",
+    icons: [],
+  },
 ];
 
 export function HeroSection() {
+  const plugin = useRef(
+    Autoplay({ delay: 5000, stopOnInteraction: true })
+  );
+
   return (
-    <section className="relative bg-card overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      </div>
+    <section className="relative bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+      <Carousel
+        plugins={[plugin.current]}
+        className="w-full"
+        onMouseEnter={plugin.current.stop}
+        onMouseLeave={plugin.current.reset}
+      >
+        <CarouselContent>
+          {carouselSlides.map((slide) => (
+            <CarouselItem key={slide.id}>
+              <div className="relative min-h-[500px] md:min-h-[600px] lg:min-h-[650px] flex items-center">
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <img
+                    src={slide.image}
+                    alt={slide.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/40" />
+                </div>
 
-      <div className="section-container relative">
-        <div className="grid lg:grid-cols-2 gap-12 items-center py-16 lg:py-24">
-          {/* Content */}
-          <div className="animate-slide-up">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
-              Recently Open Admissions in{" "}
-              <span className="text-primary">Italian Universities</span>
-            </h1>
-            <p className="text-lg text-muted-foreground mb-8 max-w-xl">
-              Discover the latest bachelor's, master's, and PhD admissions across Italy.
-              Updated daily with official deadlines and eligibility details for international and local students.
-            </p>
+                {/* Content */}
+                <div className="section-container relative z-10">
+                  <div className="grid lg:grid-cols-2 gap-12 items-center py-16 lg:py-20">
+                    {/* Text Content */}
+                    <div className="text-white animate-slide-up max-w-2xl">
+                      {slide.icons.length > 0 && (
+                        <div className="flex gap-4 mb-8">
+                          {slide.icons.map(({ Icon, color }, idx) => (
+                            <div
+                              key={idx}
+                              className={`w-16 h-16 rounded-full ${color} flex items-center justify-center shadow-lg animate-fade-in`}
+                              style={{ animationDelay: `${idx * 100}ms` }}
+                            >
+                              <Icon className="w-8 h-8" />
+                            </div>
+                          ))}
+                        </div>
+                      )}
 
-            <div className="flex flex-wrap gap-4 mb-12">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2 rounded-full px-8">
-                View Recent Admissions
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-full px-8"
-              >
-                Browse Universities
-              </Button>
-            </div>
+                      <p className="text-lg md:text-xl text-gray-200 mb-4 font-medium">
+                        {slide.subtitle}
+                      </p>
 
-            {/* Trust Indicators */}
-            <div className="flex flex-wrap gap-8">
-              {trustIndicators.map((item) => (
-                <div key={item.label} className="flex items-center gap-3">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-                    <item.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-xl font-bold text-foreground">{item.value}</p>
-                    <p className="text-sm text-muted-foreground">{item.label}</p>
+                      <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 leading-tight">
+                        {slide.title}
+                      </h1>
+
+                      <p className="text-xl md:text-2xl lg:text-3xl text-gray-200 mb-8 font-light">
+                        {slide.description}
+                      </p>
+
+                      <Button
+                        size="lg"
+                        className="bg-black text-white hover:bg-gray-800 px-8 py-6 text-lg font-semibold rounded-md shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
+                      >
+                        {slide.cta}
+                      </Button>
+                    </div>
+
+                    {/* Right Side - Image/Visual */}
+                    <div className="hidden lg:flex items-center justify-center">
+                      <div className="relative">
+                        {slide.id === 1 ? (
+                          <div className="relative w-full max-w-md">
+                            <img
+                              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&h=600&fit=crop"
+                              alt="Student studying"
+                              className="rounded-2xl shadow-2xl w-full h-auto object-cover"
+                            />
+                            {/* <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-xl p-4 animate-fade-in">
+                              <div className="flex items-center gap-3">
+                                <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                  </svg>
+                                </div>
+                                <div>
+                                  <p className="text-sm font-bold text-gray-800">1000+ Students</p>
+                                  <p className="text-xs text-gray-600">Successfully Enrolled</p>
+                                </div>
+                              </div>
+                            </div> */}
+                          </div>
+                        ) : slide.id === 2 ? (
+                          <div className="w-96 h-96 rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/20 flex items-center justify-center">
+                            <div className="text-center">
+                              <p className="text-6xl font-bold text-white mb-2">80+</p>
+                              <p className="text-xl text-gray-200">Universities</p>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="relative w-full max-w-md">
+                            <div className="bg-white/10 backdrop-blur-sm border-2 border-white/30 rounded-2xl p-8 shadow-2xl">
+                              <div className="flex items-center gap-4 mb-6">
+                                <div className="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center">
+                                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                  </svg>
+                                </div>
+                                <div className="text-white">
+                                  <p className="text-3xl font-bold">Daily</p>
+                                  <p className="text-lg text-gray-200">Notifications</p>
+                                </div>
+                              </div>
+                              <div className="space-y-3">
+                                <div className="bg-white/20 rounded-lg p-3 animate-fade-in" style={{ animationDelay: '100ms' }}>
+                                  <p className="text-white text-sm font-semibold">New: Politecnico di Milano</p>
+                                  <p className="text-gray-200 text-xs">Master's admission opened</p>
+                                </div>
+                                <div className="bg-white/20 rounded-lg p-3 animate-fade-in" style={{ animationDelay: '200ms' }}>
+                                  <p className="text-white text-sm font-semibold">Deadline: University of Bologna</p>
+                                  <p className="text-gray-200 text-xs">Application closes in 5 days</p>
+                                </div>
+                                <div className="bg-white/20 rounded-lg p-3 animate-fade-in" style={{ animationDelay: '300ms' }}>
+                                  <p className="text-white text-sm font-semibold">Alert: Sapienza University</p>
+                                  <p className="text-gray-200 text-xs">PhD program now accepting</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Hero Visual */}
-          <div className="relative hidden lg:block">
-            <div className="relative">
-              {/* Main Image Placeholder - Academic Scene */}
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src={heroStudents}
-                  alt="International students at Italian university campus"
-                  className="w-full h-[500px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
               </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
 
-              {/* Floating Card */}
-              <div className="absolute -bottom-6 -left-6 bg-card rounded-xl shadow-lg p-4 border border-border animate-fade-in">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-success/20 flex items-center justify-center">
-                    <CalendarCheck className="w-5 h-5 text-success" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">New Admissions</p>
-                    <p className="text-xs text-muted-foreground">12 opened this week</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Decorative Elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-accent/20 rounded-full blur-2xl" />
-              <div className="absolute top-1/2 -right-8 w-16 h-16 bg-primary/20 rounded-full blur-xl" />
-            </div>
-          </div>
+        {/* Navigation Arrows */}
+        <div className="hidden md:block">
+          <CarouselPrevious className="left-4 lg:left-8 bg-white/90 hover:bg-white text-gray-800 border-none shadow-lg" />
+          <CarouselNext className="right-4 lg:right-8 bg-white/90 hover:bg-white text-gray-800 border-none shadow-lg" />
         </div>
-      </div>
+      </Carousel>
     </section>
   );
 }

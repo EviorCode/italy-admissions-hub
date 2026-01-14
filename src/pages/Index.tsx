@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { StatsSection } from "@/components/sections/StatsSection";
 import { RecentAdmissions } from "@/components/sections/RecentAdmissions";
 import { QuickFilters } from "@/components/sections/QuickFilters";
 import { WhyStudyItaly } from "@/components/sections/WhyStudyItaly";
@@ -15,6 +16,7 @@ const Index = () => {
       <Navbar />
       <main className="flex-1">
         <HeroSection />
+        <StatsSection />
         <RecentAdmissions />
         <QuickFilters />
         <WhyStudyItaly />

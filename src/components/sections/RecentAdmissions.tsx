@@ -1,15 +1,12 @@
-import { ArrowRight, Calendar, Clock, Globe } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { ArrowRight, Globe, Calendar } from "lucide-react";
 
 interface Admission {
   id: number;
   university: string;
-  universityLogo: string;
+  universityImage: string;
   program: string;
   degreeLevel: string;
   language: string;
-  openedDate: string;
   deadline: string;
   isNew: boolean;
   deadlineSoon: boolean;
@@ -19,158 +16,179 @@ const admissions: Admission[] = [
   {
     id: 1,
     university: "Politecnico di Milano",
-    universityLogo: "🏛️",
+    universityImage: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&h=400&fit=crop",
     program: "MSc Computer Science & Engineering",
     degreeLevel: "Master's",
     language: "English",
-    openedDate: "Opened 2 days ago",
-    deadline: "March 15, 2026",
+    deadline: "Mar 15, 2026",
     isNew: true,
     deadlineSoon: false,
   },
   {
     id: 2,
     university: "University of Bologna",
-    universityLogo: "🎓",
+    universityImage: "https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?w=800&h=400&fit=crop",
     program: "BA Economics and Finance",
     degreeLevel: "Bachelor's",
     language: "English",
-    openedDate: "Opened 5 days ago",
-    deadline: "February 28, 2026",
+    deadline: "Feb 28, 2026",
     isNew: true,
     deadlineSoon: true,
   },
   {
     id: 3,
     university: "Sapienza University of Rome",
-    universityLogo: "🏫",
+    universityImage: "https://images.unsplash.com/photo-1567168544813-cc03465b4fa8?w=800&h=400&fit=crop",
     program: "PhD Data Science",
     degreeLevel: "PhD",
     language: "English",
-    openedDate: "Opened 1 week ago",
-    deadline: "April 10, 2026",
+    deadline: "Apr 10, 2026",
     isNew: false,
     deadlineSoon: false,
   },
   {
     id: 4,
     university: "Bocconi University",
-    universityLogo: "📚",
+    universityImage: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&h=400&fit=crop",
     program: "MSc International Management",
     degreeLevel: "Master's",
     language: "English",
-    openedDate: "Opened 3 days ago",
-    deadline: "March 1, 2026",
+    deadline: "Mar 1, 2026",
     isNew: true,
     deadlineSoon: true,
   },
   {
     id: 5,
     university: "University of Padua",
-    universityLogo: "🏛️",
+    universityImage: "https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=800&h=400&fit=crop",
     program: "BSc Biotechnology",
     degreeLevel: "Bachelor's",
     language: "Italian",
-    openedDate: "Opened 4 days ago",
-    deadline: "March 20, 2026",
+    deadline: "Mar 20, 2026",
     isNew: true,
     deadlineSoon: false,
   },
   {
     id: 6,
     university: "University of Milan",
-    universityLogo: "🎓",
+    universityImage: "https://images.unsplash.com/photo-1571844307880-751c6d86f3f3?w=800&h=400&fit=crop",
     program: "MSc Artificial Intelligence",
     degreeLevel: "Master's",
     language: "English",
-    openedDate: "Opened 6 days ago",
-    deadline: "March 30, 2026",
+    deadline: "Mar 30, 2026",
     isNew: false,
     deadlineSoon: false,
   },
 ];
 
-function AdmissionCard({ admission }: { admission: Admission }) {
+function AdmissionCard({ admission, index }: { admission: Admission; index: number }) {
   return (
-    <div className="bg-card rounded-xl border border-border p-6 card-hover shadow-sm">
-      {/* Header */}
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center text-2xl">
-            {admission.universityLogo}
-          </div>
-          <div>
-            <h4 className="font-semibold text-foreground text-sm">{admission.university}</h4>
-            <p className="text-xs text-muted-foreground">{admission.openedDate}</p>
-          </div>
-        </div>
-        <div className="flex gap-2">
+    <div
+      className="group relative bg-white rounded-xl border border-gray-300 overflow-hidden hover:shadow-lg hover:border-primary/50 transition-all duration-300 animate-fade-in"
+      style={{ animationDelay: `${index * 80}ms` }}
+    >
+      {/* University Image */}
+      <div className="relative h-48 overflow-hidden bg-gray-100">
+        <img
+          src={admission.universityImage}
+          alt={admission.university}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+
+        {/* Status Badges */}
+        <div className="absolute top-3 right-3 flex flex-col gap-2">
           {admission.isNew && (
-            <Badge className="bg-accent text-accent-foreground text-xs">New</Badge>
+            <span className="px-2.5 py-1 bg-green-500 text-white text-xs font-semibold rounded-md shadow-lg">
+              NEW
+            </span>
           )}
           {admission.deadlineSoon && (
-            <Badge variant="destructive" className="text-xs">Deadline Soon</Badge>
+            <span className="px-2.5 py-1 bg-orange-500 text-white text-xs font-semibold rounded-md shadow-lg">
+              CLOSING SOON
+            </span>
           )}
         </div>
-      </div>
 
-      {/* Program Info */}
-      <h3 className="font-semibold text-foreground mb-3 line-clamp-2">{admission.program}</h3>
-
-      {/* Details */}
-      <div className="flex flex-wrap gap-3 mb-4">
-        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-          <span className="w-2 h-2 rounded-full bg-primary" />
-          {admission.degreeLevel}
+        {/* University Logo/Name Overlay */}
+        <div className="absolute bottom-3 left-3 right-3">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-lg bg-white shadow-lg flex items-center justify-center text-2xl font-bold text-primary">
+              {admission.university.charAt(0)}
+            </div>
+            <div className="flex-1 min-w-0">
+              <h4 className="text-sm font-semibold text-white truncate">
+                {admission.university}
+              </h4>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-          <Globe className="w-3.5 h-3.5" />
-          {admission.language}
+      </div>
+
+      {/* Card Content */}
+      <div className="p-5">
+        {/* Program Title */}
+        <h3 className="text-lg font-semibold text-foreground mb-4 leading-tight group-hover:text-primary transition-colors line-clamp-2">
+          {admission.program}
+        </h3>
+
+        {/* Meta Information */}
+        <div className="flex items-center gap-4 mb-4 pb-4 border-b border-gray-100">
+          <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="font-medium">{admission.degreeLevel}</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+            <Globe className="w-3.5 h-3.5" strokeWidth={2} />
+            <span>{admission.language}</span>
+          </div>
+        </div>
+
+        {/* Deadline */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Calendar className="w-4 h-4 text-primary" />
+            <div>
+              <p className="text-xs text-muted-foreground">Deadline</p>
+              <p className="text-sm font-semibold text-foreground">{admission.deadline}</p>
+            </div>
+          </div>
+          <button className="w-9 h-9 rounded-full bg-gray-100 group-hover:bg-primary flex items-center justify-center transition-colors">
+            <ArrowRight className="w-4 h-4 text-gray-600 group-hover:text-white transition-colors" />
+          </button>
         </div>
       </div>
-
-      {/* Deadline */}
-      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4 p-3 bg-secondary/50 rounded-lg">
-        <Calendar className="w-4 h-4 text-primary" />
-        <span>Deadline: <span className="font-medium text-foreground">{admission.deadline}</span></span>
-      </div>
-
-      {/* CTA */}
-      <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-        View Details
-        <ArrowRight className="w-4 h-4 ml-2" />
-      </Button>
     </div>
   );
 }
 
 export function RecentAdmissions() {
   return (
-    <section id="admissions" className="section-padding bg-secondary/30">
+    <section id="admissions" className="py-20 md:py-24 bg-gray-50">
       <div className="section-container">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-3">
             Recently Open Admissions
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            The latest admission announcements from Italian universities, sorted by opening date.
+          <p className="text-base text-muted-foreground max-w-2xl">
+            Latest admission announcements from Italian universities
           </p>
         </div>
 
         {/* Admissions Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {admissions.map((admission) => (
-            <AdmissionCard key={admission.id} admission={admission} />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {admissions.map((admission, index) => (
+            <AdmissionCard key={admission.id} admission={admission} index={index} />
           ))}
         </div>
 
-        {/* View All CTA */}
+        {/* CTA Button */}
         <div className="text-center">
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2 rounded-full px-8">
-            View all open admissions
+          <button className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white hover:bg-primary/90 transition-colors font-medium rounded-lg shadow-md hover:shadow-lg">
+            View All Admissions
             <ArrowRight className="w-4 h-4" />
-          </Button>
+          </button>
         </div>
       </div>
     </section>

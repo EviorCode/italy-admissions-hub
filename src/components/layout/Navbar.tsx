@@ -1,217 +1,297 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Phone, Mail, Facebook, Instagram, Twitter, Youtube, Menu, X, GraduationCap, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import {
+  Phone,
+  Mail,
+  Facebook,
+  Instagram,
+  Twitter,
+  Youtube,
+  Menu,
+  X,
+  GraduationCap,
+  ChevronDown,
+  Building2,
+  MapPin,
+  Star,
+  BookOpen,
+  FileText,
+  Users,
+  Globe,
+  Award
+} from "lucide-react";
 
-const universities = {
-  byType: [
-    { name: "Public Universities", href: "#" },
-    { name: "Private Universities", href: "#" },
-    { name: "Medical Universities", href: "#" },
-    { name: "Arts & Design Academies", href: "#" },
-  ],
-  byCity: [
-    { name: "Milan", href: "#" },
-    { name: "Rome", href: "#" },
-    { name: "Bologna", href: "#" },
-    { name: "Turin", href: "#" },
-    { name: "Florence", href: "#" },
-    { name: "Naples", href: "#" },
-  ],
-  popular: [
-    { name: "University of Bologna", href: "#" },
-    { name: "Sapienza University of Rome", href: "#" },
-    { name: "Politecnico di Milano", href: "#" },
-    { name: "University of Milan", href: "#" },
-    { name: "University of Padua", href: "#" },
-  ],
+const megaMenuData = {
+  universities: {
+    byType: [
+      { name: "Public Universities", href: "#", icon: Building2, desc: "State-funded institutions" },
+      { name: "Private Universities", href: "#", icon: Award, desc: "Premium private education" },
+      { name: "Medical Universities", href: "#", icon: FileText, desc: "Healthcare programs" },
+      { name: "Arts & Design", href: "#", icon: Star, desc: "Creative academies" },
+    ],
+    byCity: [
+      { name: "Milan", href: "#", programs: "142+" },
+      { name: "Rome", href: "#", programs: "289+" },
+      { name: "Bologna", href: "#", programs: "215+" },
+      { name: "Turin", href: "#", programs: "98+" },
+      { name: "Florence", href: "#", programs: "156+" },
+      { name: "Naples", href: "#", programs: "127+" },
+    ],
+    featured: [
+      {
+        name: "Politecnico di Milano",
+        href: "#",
+        ranking: "Top 5 in Italy",
+        image: "https://images.unsplash.com/photo-1562774053-701939374585?w=300&h=200&fit=crop"
+      },
+      {
+        name: "University of Bologna",
+        href: "#",
+        ranking: "Oldest in Europe",
+        image: "https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?w=300&h=200&fit=crop"
+      },
+    ],
+  },
 };
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
-  const [isStudyAbroadOpen, setIsStudyAbroadOpen] = useState(false);
-  const [isCoursesOpen, setIsCoursesOpen] = useState(false);
+  const [isUniversitiesOpen, setIsUniversitiesOpen] = useState(false);
+  const [isProgramsOpen, setIsProgramsOpen] = useState(false);
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white shadow-md">
-      {/* Top Bar */}
-      <div className="bg-gradient-to-r from-accent via-accent to-orange-500">
+      {/* Top Bar - Premium Design */}
+      <div className="bg-gradient-to-r from-accent to-accent/90 border-b border-accent/20">
         <div className="section-container">
-          <div className="flex flex-wrap items-center justify-between py-2 text-sm text-white">
-            <div className="flex flex-wrap items-center gap-4 md:gap-6">
-              <a href="tel:+390123456789" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-                <Phone className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Call: +39 (0) 123 456 789</span>
+          <div className="flex items-center justify-between py-2.5 text-sm text-white">
+            <div className="flex items-center gap-6">
+              <a href="tel:+390123456789" className="flex items-center gap-2 hover:text-white/80 transition-colors">
+                <Phone className="w-3.5 h-3.5" strokeWidth={2} />
+                <span className="hidden sm:inline font-medium">+39 (0) 123 456 789</span>
               </a>
-              <a href="tel:+390987654321" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-                <Phone className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Hotline: +39 (0) 987 654 321</span>
-              </a>
-              <a href="mailto:info@italyadmissions.edu" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-                <Mail className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">Email: info@italyadmissions.edu</span>
+              <div className="hidden md:block w-px h-4 bg-white/20" />
+              <a href="mailto:info@italyadmissions.edu" className="flex items-center gap-2 hover:text-white/80 transition-colors">
+                <Mail className="w-3.5 h-3.5" strokeWidth={2} />
+                <span className="hidden md:inline font-medium">info@italyadmissions.edu</span>
               </a>
             </div>
-            <div className="flex items-center gap-3">
-              <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Facebook">
-                <Facebook className="w-4 h-4" />
+            <div className="flex items-center gap-4">
+              <a href="#" className="hover:text-white/80 transition-colors" aria-label="Facebook">
+                <Facebook className="w-4 h-4" strokeWidth={2} />
               </a>
-              <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Instagram">
-                <Instagram className="w-4 h-4" />
+              <a href="#" className="hover:text-white/80 transition-colors" aria-label="Instagram">
+                <Instagram className="w-4 h-4" strokeWidth={2} />
               </a>
-              <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Twitter">
-                <Twitter className="w-4 h-4" />
+              <a href="#" className="hover:text-white/80 transition-colors" aria-label="Twitter">
+                <Twitter className="w-4 h-4" strokeWidth={2} />
               </a>
-              <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Youtube">
-                <Youtube className="w-4 h-4" />
+              <a href="#" className="hover:text-white/80 transition-colors" aria-label="Youtube">
+                <Youtube className="w-4 h-4" strokeWidth={2} />
               </a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Main Navigation */}
-      <nav className="bg-white">
+      {/* Main Navigation - Premium Design */}
+      <nav className="bg-white border-b border-gray-100">
         <div className="section-container">
-          <div className="flex h-[80px] items-center justify-between">
-            {/* Logo */}
+          <div className="flex h-20 items-center justify-between">
+            {/* Logo - Premium */}
             <Link to="/" className="flex items-center gap-3 group">
-              <div className="relative">
-                <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary via-blue-600 to-blue-700 shadow-lg group-hover:shadow-xl transition-shadow">
-                  <GraduationCap className="w-8 h-8 text-white" />
-                </div>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
+              <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-sm group-hover:shadow transition-shadow">
+                <GraduationCap className="w-6 h-6 text-white" strokeWidth={2.5} />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-bold text-primary leading-tight">
+                <span className="text-xl font-bold text-foreground leading-tight">
                   ItalyAdmissions
                 </span>
-                <span className="text-xs text-muted-foreground uppercase tracking-wider">
+                <span className="text-[11px] text-muted-foreground font-medium tracking-wide">
                   Study in Italy Hub
                 </span>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+            <div className="hidden lg:flex items-center gap-2">
               <Link
                 to="/"
-                className="px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
+                className="px-4 py-2.5 text-sm font-semibold text-gray-700 hover:text-primary transition-colors"
               >
                 Home
               </Link>
 
-              {/* About Dropdown */}
+              {/* Universities Mega Menu */}
               <div
                 className="relative"
-                onMouseEnter={() => setIsAboutOpen(true)}
-                onMouseLeave={() => setIsAboutOpen(false)}
+                onMouseEnter={() => setIsUniversitiesOpen(true)}
+                onMouseLeave={() => setIsUniversitiesOpen(false)}
               >
-                <button className="flex items-center gap-1 px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
-                  About
-                  <ChevronDown className={`w-4 h-4 transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} />
+                <button className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-gray-700 hover:text-primary transition-colors">
+                  Universities
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isUniversitiesOpen ? 'rotate-180' : ''}`} strokeWidth={2.5} />
                 </button>
-                {isAboutOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-lg shadow-xl border border-border py-2 animate-fade-in">
-                    <Link to="#about" className="block px-4 py-2 text-sm text-foreground hover:bg-primary/5 hover:text-primary transition-colors">
-                      About Us
-                    </Link>
-                    <Link to="#team" className="block px-4 py-2 text-sm text-foreground hover:bg-primary/5 hover:text-primary transition-colors">
-                      Our Team
-                    </Link>
-                    <Link to="#mission" className="block px-4 py-2 text-sm text-foreground hover:bg-primary/5 hover:text-primary transition-colors">
-                      Our Mission
-                    </Link>
+
+                {/* Mega Menu Dropdown */}
+                {isUniversitiesOpen && (
+                  <div className="absolute top-full left-0 mt-0 w-screen max-w-5xl -translate-x-1/4">
+                    <div className="bg-white rounded-xl shadow-xl border border-gray-200 p-8 mt-2">
+                      <div className="grid grid-cols-3 gap-8">
+                        {/* By Type Column */}
+                        <div>
+                          <h3 className="text-xs font-bold text-gray-500 mb-4 uppercase tracking-wider">By Type</h3>
+                          <div className="space-y-0.5">
+                            {megaMenuData.universities.byType.map((type) => (
+                              <Link
+                                key={type.name}
+                                to={type.href}
+                                className="group flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                              >
+                                <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/15 transition-colors flex-shrink-0">
+                                  <type.icon className="w-4 h-4 text-primary" strokeWidth={2} />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
+                                    {type.name}
+                                  </div>
+                                  <div className="text-xs text-muted-foreground mt-0.5 line-clamp-1">{type.desc}</div>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* By City Column */}
+                        <div>
+                          <h3 className="text-xs font-bold text-gray-500 mb-4 uppercase tracking-wider">By City</h3>
+                          <div className="grid grid-cols-2 gap-1.5">
+                            {megaMenuData.universities.byCity.map((city) => (
+                              <Link
+                                key={city.name}
+                                to={city.href}
+                                className="group p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                              >
+                                <div className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
+                                  {city.name}
+                                </div>
+                                <div className="text-xs text-muted-foreground mt-0.5">{city.programs} programs</div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Featured Universities */}
+                        <div>
+                          <h3 className="text-xs font-bold text-gray-500 mb-4 uppercase tracking-wider">Featured</h3>
+                          <div className="space-y-3">
+                            {megaMenuData.universities.featured.map((uni) => (
+                              <Link
+                                key={uni.name}
+                                to={uni.href}
+                                className="group block rounded-lg overflow-hidden border border-gray-200 hover:border-primary/40 hover:shadow-md transition-all"
+                              >
+                                <div className="relative h-20 overflow-hidden">
+                                  <img
+                                    src={uni.image}
+                                    alt={uni.name}
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                                  <div className="absolute bottom-1.5 left-2 right-2">
+                                    <div className="text-xs font-bold text-white line-clamp-1">{uni.name}</div>
+                                    <div className="text-[10px] text-white/90 mt-0.5">{uni.ranking}</div>
+                                  </div>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
 
-              {/* Study Abroad Dropdown */}
+              {/* Programs Dropdown */}
               <div
                 className="relative"
-                onMouseEnter={() => setIsStudyAbroadOpen(true)}
-                onMouseLeave={() => setIsStudyAbroadOpen(false)}
+                onMouseEnter={() => setIsProgramsOpen(true)}
+                onMouseLeave={() => setIsProgramsOpen(false)}
               >
-                <button className="flex items-center gap-1 px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
-                  Study Abroad
-                  <ChevronDown className={`w-4 h-4 transition-transform ${isStudyAbroadOpen ? 'rotate-180' : ''}`} />
+                <button className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-gray-700 hover:text-primary transition-colors">
+                  Programs
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isProgramsOpen ? 'rotate-180' : ''}`} strokeWidth={2.5} />
                 </button>
-                {isStudyAbroadOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-xl border border-border py-2 animate-fade-in">
-                    <Link to="#universities" className="block px-4 py-2 text-sm text-foreground hover:bg-primary/5 hover:text-primary transition-colors">
-                      Italian Universities
+                {isProgramsOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 p-1.5">
+                    <Link to="#bachelor" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-md transition-colors">
+                      <BookOpen className="w-4 h-4" strokeWidth={2} />
+                      Bachelor's Degrees
                     </Link>
-                    <Link to="#admissions" className="block px-4 py-2 text-sm text-foreground hover:bg-primary/5 hover:text-primary transition-colors">
-                      Admission Process
+                    <Link to="#master" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-md transition-colors">
+                      <Award className="w-4 h-4" strokeWidth={2} />
+                      Master's Degrees
                     </Link>
-                    <Link to="#visa" className="block px-4 py-2 text-sm text-foreground hover:bg-primary/5 hover:text-primary transition-colors">
-                      Visa Information
-                    </Link>
-                    <Link to="#scholarships" className="block px-4 py-2 text-sm text-foreground hover:bg-primary/5 hover:text-primary transition-colors">
-                      Scholarships
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-              {/* Courses Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => setIsCoursesOpen(true)}
-                onMouseLeave={() => setIsCoursesOpen(false)}
-              >
-                <button className="flex items-center gap-1 px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
-                  Courses
-                  <ChevronDown className={`w-4 h-4 transition-transform ${isCoursesOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {isCoursesOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-xl border border-border py-2 animate-fade-in">
-                    <Link to="#bachelor" className="block px-4 py-2 text-sm text-foreground hover:bg-primary/5 hover:text-primary transition-colors">
-                      Bachelor Programs
-                    </Link>
-                    <Link to="#master" className="block px-4 py-2 text-sm text-foreground hover:bg-primary/5 hover:text-primary transition-colors">
-                      Master Programs
-                    </Link>
-                    <Link to="#phd" className="block px-4 py-2 text-sm text-foreground hover:bg-primary/5 hover:text-primary transition-colors">
+                    <Link to="#phd" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-md transition-colors">
+                      <GraduationCap className="w-4 h-4" strokeWidth={2} />
                       PhD Programs
                     </Link>
-                    <Link to="#language" className="block px-4 py-2 text-sm text-foreground hover:bg-primary/5 hover:text-primary transition-colors">
+                    <div className="my-1.5 border-t border-gray-200"></div>
+                    <Link to="#language" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-md transition-colors">
+                      <Globe className="w-4 h-4" strokeWidth={2} />
                       Language Courses
                     </Link>
                   </div>
                 )}
               </div>
 
-              <Link
-                to="#services"
-                className="px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
+              {/* Resources Dropdown */}
+              <div
+                className="relative"
+                onMouseEnter={() => setIsResourcesOpen(true)}
+                onMouseLeave={() => setIsResourcesOpen(false)}
               >
-                Services
+                <button className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-gray-700 hover:text-primary transition-colors">
+                  Resources
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isResourcesOpen ? 'rotate-180' : ''}`} strokeWidth={2.5} />
+                </button>
+                {isResourcesOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 p-1.5">
+                    <Link to="#visa" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-md transition-colors">
+                      <FileText className="w-4 h-4" strokeWidth={2} />
+                      Visa Guide
+                    </Link>
+                    <Link to="#scholarships" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-md transition-colors">
+                      <Award className="w-4 h-4" strokeWidth={2} />
+                      Scholarships
+                    </Link>
+                    <Link to="#living" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-md transition-colors">
+                      <Users className="w-4 h-4" strokeWidth={2} />
+                      Cost of Living
+                    </Link>
+                    <Link to="#faqs" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-md transition-colors">
+                      <BookOpen className="w-4 h-4" strokeWidth={2} />
+                      FAQs
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              <Link
+                to="#admissions"
+                className="px-4 py-2.5 text-sm font-semibold text-gray-700 hover:text-primary transition-colors"
+              >
+                Admissions
               </Link>
 
               <Link
                 to="#contact"
-                className="px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
+                className="ml-4 px-6 py-2.5 text-sm font-semibold text-white bg-accent hover:bg-accent/90 rounded-lg shadow-sm hover:shadow transition-all"
               >
-                Contact
+                Contact Us
               </Link>
-
-              <Link
-                to="#news"
-                className="px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
-              >
-                News & Posts
-              </Link>
-            </div>
-
-            {/* Search Icon */}
-            <div className="hidden lg:flex items-center">
-              <button className="p-2.5 text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
             </div>
 
             {/* Mobile Menu Toggle */}
@@ -219,35 +299,63 @@ export function Navbar() {
               className="lg:hidden p-2 text-foreground hover:text-primary transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMobileMenuOpen ? <X className="w-6 h-6" strokeWidth={2.5} /> : <Menu className="w-6 h-6" strokeWidth={2.5} />}
             </button>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu - Premium Design */}
           {isMobileMenuOpen && (
-            <div className="lg:hidden py-4 border-t border-border animate-fade-in">
-              <div className="flex flex-col gap-2">
-                <Link to="/" className="px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
+            <div className="lg:hidden py-4 border-t border-gray-200">
+              <div className="flex flex-col gap-0.5">
+                <Link
+                  to="/"
+                  className="px-4 py-3 text-sm font-semibold text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   Home
                 </Link>
-                <Link to="#about" className="px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
-                  About
+
+                <Link
+                  to="#universities"
+                  className="px-4 py-3 text-sm font-semibold text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Universities
                 </Link>
-                <Link to="#study-abroad" className="px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
-                  Study Abroad
+
+                <Link
+                  to="#programs"
+                  className="px-4 py-3 text-sm font-semibold text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Programs
                 </Link>
-                <Link to="#courses" className="px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
-                  Courses
+
+                <Link
+                  to="#resources"
+                  className="px-4 py-3 text-sm font-semibold text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Resources
                 </Link>
-                <Link to="#services" className="px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
-                  Services
+
+                <Link
+                  to="#admissions"
+                  className="px-4 py-3 text-sm font-semibold text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Admissions
                 </Link>
-                <Link to="#contact" className="px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
-                  Contact
-                </Link>
-                <Link to="#news" className="px-4 py-2 text-sm font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
-                  News & Posts
-                </Link>
+
+                <div className="mt-4 px-4">
+                  <Link
+                    to="#contact"
+                    className="block w-full px-6 py-3 text-sm font-semibold text-center text-white bg-primary hover:bg-primary/90 rounded-lg shadow-sm hover:shadow transition-all"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Contact Us
+                  </Link>
+                </div>
               </div>
             </div>
           )}

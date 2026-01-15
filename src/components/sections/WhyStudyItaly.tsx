@@ -29,7 +29,7 @@ const reasons = [
 
 export function WhyStudyItaly() {
   return (
-    <section className="py-20 md:py-24 bg-gray-50">
+    <section id="why-italy" className="py-20 md:py-24 bg-gray-50">
       <div className="section-container">
         {/* Section Header */}
         <div className="mb-12">

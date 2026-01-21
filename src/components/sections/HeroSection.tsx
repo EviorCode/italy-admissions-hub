@@ -1,30 +1,27 @@
-import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
-import { Mic, Monitor, Laptop, Headphones } from "lucide-react";
+import { GraduationCap, Users, Award, Globe } from "lucide-react";
 
 const carouselSlides = [
   {
     id: 1,
-    title: "Recently Open Admissions",
-    subtitle: "Your Gateway to Italian Higher Education",
-    description: "in Italian Universities - Updated Daily",
-    cta: "View Admissions",
+    title: "Your Dream of Studying in Italy Starts Here",
+    subtitle: "Expert Admission Guidance",
+    description: "We help you secure admission in top Italian universities with personalized support at every step",
     image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&h=600&fit=crop",
     icons: [
-      { Icon: Mic, color: "bg-pink-100 text-pink-500" },
-      { Icon: Headphones, color: "bg-purple-100 text-purple-500" },
-      { Icon: Monitor, color: "bg-green-100 text-green-500" },
-      { Icon: Laptop, color: "bg-cyan-100 text-cyan-500" },
+      { Icon: GraduationCap, color: "bg-pink-100 text-pink-500" },
+      { Icon: Users, color: "bg-purple-100 text-purple-500" },
+      { Icon: Award, color: "bg-green-100 text-green-500" },
+      { Icon: Globe, color: "bg-cyan-100 text-cyan-500" },
     ],
   },
   {
     id: 2,
-    title: "Study in Italy",
-    subtitle: "Discover World-Class Education",
-    description: "Explore 80+ prestigious Italian universities and academies",
-    cta: "Browse Universities",
+    title: "500+ Students Successfully Placed",
+    subtitle: "Proven Track Record",
+    description: "Join hundreds of students who achieved their dream of studying at prestigious Italian universities",
     image: "https://images.unsplash.com/photo-1561525985-654e6a2fa04a?w=1200&h=600&fit=crop",
     icons: [],
   },
@@ -33,7 +30,6 @@ const carouselSlides = [
     title: "Never Miss a Deadline",
     subtitle: "Stay Updated with Real-Time Alerts",
     description: "Get notified when new admissions open at your dream universities",
-    cta: "Get Alerts",
     image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&h=600&fit=crop",
     icons: [],
   },
@@ -93,16 +89,9 @@ export function HeroSection() {
                         {slide.title}
                       </h1>
 
-                      <p className="text-xl md:text-2xl lg:text-3xl text-gray-200 mb-8 font-light">
+                      <p className="text-xl md:text-2xl lg:text-3xl text-gray-200 font-light">
                         {slide.description}
                       </p>
-
-                      <Button
-                        size="lg"
-                        className="bg-black text-white hover:bg-gray-800 px-8 py-6 text-lg font-semibold rounded-md shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
-                      >
-                        {slide.cta}
-                      </Button>
                     </div>
 
                     {/* Right Side - Image/Visual */}
@@ -115,25 +104,12 @@ export function HeroSection() {
                               alt="Student studying"
                               className="rounded-2xl shadow-2xl w-full h-auto object-cover"
                             />
-                            {/* <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-xl p-4 animate-fade-in">
-                              <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-                                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                  </svg>
-                                </div>
-                                <div>
-                                  <p className="text-sm font-bold text-gray-800">1000+ Students</p>
-                                  <p className="text-xs text-gray-600">Successfully Enrolled</p>
-                                </div>
-                              </div>
-                            </div> */}
                           </div>
                         ) : slide.id === 2 ? (
                           <div className="w-96 h-96 rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/20 flex items-center justify-center">
                             <div className="text-center">
-                              <p className="text-6xl font-bold text-white mb-2">80+</p>
-                              <p className="text-xl text-gray-200">Universities</p>
+                              <p className="text-6xl font-bold text-white mb-2">500+</p>
+                              <p className="text-xl text-gray-200">Students Placed</p>
                             </div>
                           </div>
                         ) : (

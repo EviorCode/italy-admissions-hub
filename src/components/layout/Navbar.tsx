@@ -33,10 +33,10 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white shadow-md">
-      {/* Top Bar - Premium Design */}
-      <div className="bg-gradient-to-r from-accent to-accent/90 border-b border-accent/20">
-        <div className="section-container">
+    <header className="sticky top-0 z-50 w-full shadow-md">
+      {/* Top Bar - Full Width Background */}
+      <div className="w-full bg-gradient-to-r from-accent to-accent/90 border-b border-accent/20">
+        <div className=" px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-2.5 text-sm text-white">
             <div className="flex items-center gap-6">
               <a href="tel:+390123456789" className="flex items-center gap-2 hover:text-white/80 transition-colors">
@@ -67,9 +67,9 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Main Navigation - Premium Design */}
-      <nav className="bg-white border-b border-gray-100">
-        <div className="section-container">
+      {/* Main Navigation - Full Width Background */}
+      <nav className="w-full bg-white border-b border-gray-100">
+        <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between">
             {/* Logo - Premium */}
             <Link to="/" className="flex items-center gap-3 group">

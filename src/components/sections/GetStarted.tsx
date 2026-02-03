@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { ArrowRight, CheckCircle2, Clock, Users, Loader2, CheckCircle, AlertCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, Users, Loader2, CheckCircle, AlertCircle, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { sendConsultationEmail, type ConsultationFormData } from "@/services/emailService";
+
+const WHATSAPP_NUMBER = "923160417351";
+const WHATSAPP_MESSAGE = "Hi! I'm interested in studying in Italy and would like to book a free consultation.";
 
 const benefits = [
   {
@@ -172,13 +175,16 @@ export function GetStarted() {
                   </div>
 
                   {/* CTA Button */}
-                  <Button
-                    className="bg-primary text-white hover:bg-primary/90 h-12 px-8 font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all"
-                    onClick={() => document.getElementById("inquiry-form")?.scrollIntoView({ behavior: "smooth" })}
+                  <a
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    Book Free Consultation
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
+                    <Button className="bg-primary text-white hover:bg-primary/90 h-12 px-8 font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all">
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Contact Us Now
+                    </Button>
+                  </a>
                 </div>
 
                 {/* Right: Form */}
